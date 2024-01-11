@@ -1,23 +1,32 @@
 #!/usr/bin/env python3
 """
-Module with a type-annotated function to_kv that
-takes a string and an int or float and returns a tuple.
+Module with a type-annotated function make_multiplier that
+takes a float multiplier and returns a function.
 """
 
-from typing import Union, Tuple
+from typing import Callable
 
 
-def to_kv(k: str, v: Union[int, float]) -> Tuple[str, float]:
+def make_multiplier(multiplier: float) -> Callable[[float], float]:
     """
-    Function that returns a tuple with the string
-    and the square of the int/float.
+    Function that returns a function to multiply a float by a given multiplier.
 
     Args:
-        k (str): The input string.
-        v (Union[int, float]): The input int or float.
+        multiplier (float): The multiplier value.
 
     Returns:
-        Tuple[str, float]: A tuple containing the string
-        and the square of the int/float.
+        Callable[[float], float]: Function that multiplies float by multiplier.
     """
-    return (k, v ** 2.0)
+    def multiplier_function(x: float) -> float:
+        """
+        Inner function that multiplies a float by the multiplier.
+
+        Args:
+            x (float): The input float.
+
+        Returns:
+            float: The result of multiplying x by the multiplier.
+        """
+        return x * multiplier
+
+    return multiplier_function
